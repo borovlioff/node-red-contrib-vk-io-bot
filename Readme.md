@@ -25,4 +25,9 @@ The nodes are tested with `Node.js v18.16.0` and `Node-RED v3.0.2`.
 
 # Usage
 ## Basics
-### Receiver and sender nodes
+![Config](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/0.png)
+![Receiver](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/1.png)
+![Sender](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/5.png)
+![Event](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/2.png)
+![Command](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/3.png)
+![Keyboard](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/4.png)
