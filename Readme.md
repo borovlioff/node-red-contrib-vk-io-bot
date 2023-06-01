@@ -1,4 +1,4 @@
-# Telegram bot nodes for Node-RED
+# VK bot nodes for Node-RED
 
 
 
