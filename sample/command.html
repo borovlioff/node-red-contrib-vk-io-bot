@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('command', {
+      category: 'vk',
+      color: '#4C75A3',
+      icon: 'vk.png',
+      defaults: {
+        name: { value: '' },
+        config: { type: 'vk-config', required: true },
+        command: { value: "", required:true },
+        regex:{ value:false }
+      },
+      inputs: 0,
+      outputs: 1,
+      label: function() {
+        return this.name || 'Command';
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="command">
+    <div class="form-row">
+      <label for="node-input-config">
+        <i class="fa fa-gear"></i> Конфигурация
+      </label>
+      <input type="hidden" id="node-input-config">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-name">
+        <i class="fa fa-tag"></i> Имя
+      </label>
+      <input type="text" id="node-input-name" placeholder="Имя">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-command">
+          <i class="fa fa-tag"></i> Команда
+        </label>
+        <input type="text" id="node-input-command" placeholder="Команда">
+    </div>
+
+    <div class="form-row">
+      <label for="regex">
+        <i class="fa fa-cog"></i><span> Регулярное выражение</span>
+      </label>
+      <input type="checkbox" style="display: inline; width: 22px;vertical-align: top;" id="node-input-regex">
+    </div>
+  
+  </script>
+  

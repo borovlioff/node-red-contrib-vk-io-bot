@@ -1,0 +1,33 @@
+<script type="text/javascript">
+    RED.nodes.registerType('recipient', {
+      category: 'vk',
+      color: '#4C75A3',
+      icon: 'vk.png',
+      defaults: {
+        name: { value: '' },
+        config: { type: 'vk-config', required: true },
+      },
+      inputs: 0,
+      outputs: 1,
+      label: function() {
+        return this.name || 'Recipient';
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="recipient">
+    <div class="form-row">
+      <label for="node-input-config">
+        <i class="fa fa-gear"></i> Конфигурация
+      </label>
+      <input type="hidden" id="node-input-config">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-name">
+        <i class="fa fa-tag"></i> Имя
+      </label>
+      <input type="text" id="node-input-name" placeholder="Имя">
+    </div>
+  </script>
+  

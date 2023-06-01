@@ -1,0 +1,76 @@
+<script type="text/javascript">
+    RED.nodes.registerType('sender', {
+      category: 'vk',
+      color: '#4C75A3',
+      icon: 'vk.png',
+      align:"right",
+      defaults: {
+        name: { value: '' },
+        config: { value: '', type: 'vk-config', required: true },
+        peer_id: { value: '' },
+        text: { value: '' }
+      },
+      inputs: 1,
+      outputs: 1,
+      label: function () {
+        return this.name || 'Sender';
+      },
+      oneditprepare: function () {
+        var node = this;
+        $('#node-input-name').val(node.name);
+        $('#node-input-peer_id').val(node.peer_id);
+        $('#node-input-text').val(node.text);
+        $('#node-input-config').val(node.config);
+      },
+      oneditcancel: function () {
+        // Сбросить значения при отмене редактирования
+        $('#node-input-name').val('');
+        $('#node-input-config').val('');
+        $('#node-input-peer_id').val('');
+        $('#node-input-text').val('');
+      },
+      oneditsave: function () {
+        // Сохранить значения при сохранении настроек
+        this.name = $('#node-input-name').val().trim();
+        this.config = $('#node-input-config').val().trim();
+        this.peer_Id = $('#node-input-peer_id').val().trim();
+        this.text = $('#node-input-text').val().trim();
+      }
+    });
+</script>
+
+
+<script type="text/html" data-template-name="sender">
+    <div class="form-row">
+      <label for="node-input-name">
+        <i class="fa fa-tag"></i> Имя
+      </label>
+      <input type="text" id="node-input-name" placeholder="Имя">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-config">
+        <i class="fa fa-cog"></i> Конфигурация
+      </label>
+      <input id="node-input-config" required>
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-peer_id">
+        <i class="fa fa-user"></i> Peer ID
+      </label>
+      <input type="text" id="node-input-peer_id" placeholder="Peer ID">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-text">
+        <i class="fa fa-pencil"></i> Текст сообщения
+      </label>
+      <input type="text" id="node-input-text" placeholder="Текст сообщения">
+    </div>
+  </script>
+
+  <script type="text/html" data-help-name="sender">
+    <a href="https://dev.vk.com/method/messages.send">https://dev.vk.com/method/messages.send</a>
+  </script>
+    
