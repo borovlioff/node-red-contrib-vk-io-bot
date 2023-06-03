@@ -38,11 +38,13 @@ The nodes are tested with `Node.js v18.16.0` and `Node-RED v3.0.2`.
 ![Receiver](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/1.png)
 ### Sender - sends a message to the given user
 Text and user ID can be set manually or passed to the input of the node
+
 ![Sender](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/5.png)
 ### Event - listens for events through long polls and passes the events selected in the node configuration to the output
 ![Event](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/2.png)
 ### Callback-event -receives events from the outside and passes the events selected in the node configuration to the output.
-To receive requests from VK servers, you need to add a node "response", you also need to add "http in", from the node "http in" you need to add a thread to the input "callback-event"
+To receive requests from VK servers, you need to add a node "http in", you also need to add "http response", from the node "http in" you need to add a thread to the input "callback-event"
+
 Do not forget to confirm your server, for this, between the nodes "http in" and "http response" you need to add "template" with a response for confirmation and for a permanent response to incoming requests
 ![Callback event](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/6.png)
 ![Callback event](https://github.com/borovlioff/node-red-contrib-vk-io-bot/blob/master/doc/7.png)
