@@ -45,7 +45,6 @@
       var node = this;
       node.keyboardOld = JSON.stringify(node.keyboard);
       node.gridHeight = node.keyboard.buttons.length;
-      console.log(node);
       $('#node-input-name').val(node.name);
       node.keyboard.inline = $('#node-input-inline').is("checked");
       node.keyboard.one_time = $('#node-input-one_time').is("checked");
@@ -102,11 +101,11 @@
             if (button.color) {
               var colorRow = $('<div class="form-row"></div>');
               var colorLabel = $('<label class="field-label form-row">Color</label>');
-              var colorInput = $(`<select value="${button.color}">
-                                    <option value="primary" selected="${button.color === "primary"? "true":"false"}" style="color:${buttonColors.primary.light}>Primary</option>
-                                    <option value="secondary" selected="${button.color === "secondary"? "true":"false"}" style="color:${buttonColors.secondary.light}">Secondary</option>
-                                    <option value="negative" selected="${button.color === "negative"? "true":"false"}" style="color:${buttonColors.negative.light}">Negative</option>
-                                    <option value="positive" selected="${button.color === "positive"? "true":"false"}" style="color:${buttonColors.positive.light}">Positive</option>
+              var colorInput = $(`<select>
+                                    <option value="primary" ${button.color === "primary"? "selected":""} style="color:${buttonColors.primary.light}">Primary</option>
+                                    <option value="secondary" ${button.color === "secondary"? "selected":""} style="color:${buttonColors.secondary.light}">Secondary</option>
+                                    <option value="negative" ${button.color === "negative"? "selected":""} style="color:${buttonColors.negative.light}">Negative</option>
+                                    <option value="positive" ${button.color === "positive"? "selected":""} style="color:${buttonColors.positive.light}">Positive</option>
                                   </select>`);
               var colorRemoveButton = $('<button class="editor-button remove-attribute">Удалить атрибут</button>');
               colorRemoveButton.click(() => {
