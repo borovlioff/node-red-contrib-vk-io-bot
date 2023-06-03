@@ -1,59 +1,59 @@
 <script type="text/javascript">
-    RED.nodes.registerType('event', {
-      category: 'vk',
-      color: '#4C75A3',
-      icon: 'vk.png',
-      align:"right",
-      defaults: {
-        name: { value: '' },
-        config: { type: 'vk-config' },
-        event: { value: 'message_new' },
-        customEvent: { value: '' }
-      },
-      inputs: 0,
-      outputs: 1,
-      label: function () {
-        return this.name || 'Event';
-      },
-      oneditprepare: function () {
-        var node = this;
-        $('#node-input-name').val(node.name);
-        $('#node-input-config').val(node.config);
-        $('#node-input-event').val(node.event);
-        $('#node-input-custom-event').val(node.customEvent);
-  
-        if (node.event === 'custom') {
+  RED.nodes.registerType('event', {
+    category: 'vk',
+    color: '#4C75A3',
+    icon: 'vk.png',
+    align: "right",
+    defaults: {
+      name: { value: '' },
+      config: { type: 'vk-config' },
+      event: { value: 'message_new' },
+      customEvent: { value: '' }
+    },
+    inputs: 0,
+    outputs: 1,
+    label: function () {
+      return this.name || 'Event';
+    },
+    oneditprepare: function () {
+      var node = this;
+      $('#node-input-name').val(node.name);
+      $('#node-input-config').val(node.config);
+      $('#node-input-event').val(node.event);
+      $('#node-input-custom-event').val(node.customEvent);
+
+      if (node.event === 'custom') {
+        $('#node-input-custom-event-row').show();
+      } else {
+        $('#node-input-custom-event-row').hide();
+      }
+
+      $('#node-input-event').on('change', function () {
+        var value = $(this).val();
+        if (value === 'custom') {
           $('#node-input-custom-event-row').show();
         } else {
           $('#node-input-custom-event-row').hide();
         }
-  
-        $('#node-input-event').on('change', function () {
-          var value = $(this).val();
-          if (value === 'custom') {
-            $('#node-input-custom-event-row').show();
-          } else {
-            $('#node-input-custom-event-row').hide();
-          }
-        });
-      },
-      oneditcancel: function () {
-        $('#node-input-name').val('');
-        $('#node-input-config').val('');
-        $('#node-input-event').val('message_new');
-        $('#node-input-custom-event').val('');
-        $('#node-input-custom-event-row').hide();
-      },
-      oneditsave: function () {
-        this.name = $('#node-input-name').val().trim();
-        this.config = $('#node-input-config').val().trim();
-        this.event = $('#node-input-event').val();
-        this.customEvent = $('#node-input-custom-event').val().trim();
-      }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="event">
+      });
+    },
+    oneditcancel: function () {
+      $('#node-input-name').val('');
+      $('#node-input-config').val('');
+      $('#node-input-event').val('message_new');
+      $('#node-input-custom-event').val('');
+      $('#node-input-custom-event-row').hide();
+    },
+    oneditsave: function () {
+      this.name = $('#node-input-name').val().trim();
+      this.config = $('#node-input-config').val().trim();
+      this.event = $('#node-input-event').val();
+      this.customEvent = $('#node-input-custom-event').val().trim();
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="event">
     <div class="form-row">
       <label for="node-input-name">
         <i class="fa fa-tag"></i> Имя
@@ -110,6 +110,23 @@
       <option value="market_comment_delete">Комментарий в товаре (удаление)</option>
       <option value="market_order_new">Заказ в магазине (новый)</option>
       <option value="market_order_edit">Заказ в магазине (редактирование)</option>
+      <option value="group_leave">Покидание пользователями группы</option>
+  <option value="group_join">Присоединение пользователей к группе</option>
+  <option value="user_block">Блокировка пользователя</option>
+  <option value="user_unblock">Разблокировка пользователя</option>
+  <option value="poll_vote_new">Новый голос в опросе</option>
+  <option value="group_officers_edit">Изменение руководства сообщества</option>
+  <option value="group_change_settings">Изменение настроек сообщества</option>
+  <option value="group_change_photo">Изменение фотографии сообщества</option>
+  <option value="vkpay_transaction">Транзакция VK Pay</option>
+  <option value="app_payload">Пользовательский платеж</option>
+  <option value="donut_subscription_create">Создание подписки в Donut</option>
+  <option value="donut_subscription_prolonged">Продление подписки в Donut</option>
+  <option value="donut_subscription_expired">Истечение срока действия подписки в Donut</option>
+  <option value="donut_subscription_cancelled">Отмена подписки в Donut</option>
+  <option value="donut_subscription_price_changed">Изменение стоимости подписки в Donut</option>
+  <option value="donut_money_withdraw">Списание средств из Donut</option>
+  <option value="donut_money_withdraw_error">Ошибка списания средств из Donut</option>
       </select>
     </div>
   
@@ -120,7 +137,7 @@
       <input type="text" id="node-input-custom-event" placeholder="Введите название событие">
     </div>
   </script>
-  
-  <script type="text/html" data-help-name="event">
+
+<script type="text/html" data-help-name="event">
     <a href="https://dev.vk.com/api/community-events/json-schema">https://dev.vk.com/api/community-events/json-schema</a>
   </script>

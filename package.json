@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-vk-io-bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,8 @@
       "sender":"sample/sender.js",
       "event":"sample/event.js",
       "keyboard":"sample/keyboard.js",
-      "command":"sample/command.js"
+      "command":"sample/command.js",
+      "callback-event":"sample/callback-event.js"
     }
   },
   "dependencies": {

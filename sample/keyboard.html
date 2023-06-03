@@ -25,7 +25,7 @@
     icon: 'vk.png',
     defaults: {
       name: { value: '' },
-      lastUpdate: { value: Date.now()},
+      lastUpdate: { value: Date.now() },
       gridHeight: { value: 1 },
       keyboard: {
         value: {
@@ -102,7 +102,12 @@
             if (button.color) {
               var colorRow = $('<div class="form-row"></div>');
               var colorLabel = $('<label class="field-label form-row">Color</label>');
-              var colorInput = $('<input type="text" class="button-field" data-field="color" value="' + button.color + '">');
+              var colorInput = $(`<select value="${button.color}">
+                                    <option value="primary" selected="${button.color === "primary"? "true":"false"}" style="color:${buttonColors.primary.light}>Primary</option>
+                                    <option value="secondary" selected="${button.color === "secondary"? "true":"false"}" style="color:${buttonColors.secondary.light}">Secondary</option>
+                                    <option value="negative" selected="${button.color === "negative"? "true":"false"}" style="color:${buttonColors.negative.light}">Negative</option>
+                                    <option value="positive" selected="${button.color === "positive"? "true":"false"}" style="color:${buttonColors.positive.light}">Positive</option>
+                                  </select>`);
               var colorRemoveButton = $('<button class="editor-button remove-attribute">Удалить атрибут</button>');
               colorRemoveButton.click(() => {
                 removeColor(i, j);
@@ -145,11 +150,11 @@
 
           var rowAction = $('<div class="form-row keyboard-buttons-row-action"></div>');
           var addButton = $('<button class="editor-button add-button" data-row-id="' + i + '">Добавить кнопку</button>');
-          var addRowButton =  $('<button class="editor-button add-row">Добавить ряд</button>');
+          var addRowButton = $('<button class="editor-button add-row">Добавить ряд</button>');
           addButton.click(() => {
             addButtonRowCol(i);
           });
-          addRowButton.click(()=>{
+          addRowButton.click(() => {
             addRow(i)
           })
           var removeRowButton = $('<button class="editor-button remove-row-button" data-row-id="' + i + '">Удалить ряд</button>');
@@ -219,7 +224,7 @@
         node.keyboard.buttons[rowId][buttonId].action[`${attrName}`] = attrValue;
       }
 
-      function removeColor(rowId, buttonId){
+      function removeColor(rowId, buttonId) {
         const { action } = node.keyboard.buttons[rowId][buttonId];
         node.keyboard.buttons[rowId][buttonId] = { action };
       }
@@ -237,7 +242,7 @@
       node.keyboard.one_time = $('#node-input-one_time').prop("checked");
       node.lastUpdate = Date.now();
     },
-    oneditcancel: function(){
+    oneditcancel: function () {
       this.keyboard = JSON.parse(this.keyboardOld);
     }
   });
