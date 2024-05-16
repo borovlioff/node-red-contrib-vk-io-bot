@@ -1,0 +1,133 @@
+<script type="text/javascript">
+    RED.nodes.registerType('method', {
+      category: 'vk',
+      color: '#4C75A3',
+      icon: 'vk.png',
+      align: "right",
+      defaults: {
+        name: { value: '' },
+        config: { value: '', type: 'vk-config', required: true },
+        method: { value: '' },
+        params: { value: undefined }
+      },
+      inputs: 1,
+      outputs: 1,
+      label: function() {
+        return this.name || 'VK Method';
+      },
+      oneditprepare: function() {
+        var node = this;
+        $('#node-input-name').val(node.name);
+        $('#node-input-method').val(node.method);
+        $('#node-input-params').val(node.params);
+        $('#node-input-config').val(node.config);
+  
+        var params = JSON.parse(node.params) || {};
+  
+        for (var key in params) {
+          if (params.hasOwnProperty(key)) {
+            addParamField(key, params[key]);
+          }
+        }
+  
+        $('#add-param').click(function() {
+          addParamField('', '');
+          saveNode();
+        });
+  
+        function addParamField(key, value) {
+          var row = $('<div class="param-row" style="display: flex; margin-bottom: 5px;"></div>');
+          var keyInput = $('<input type="text" class="param-key" placeholder="Key" style="width: 50%;">').val(key);
+          var valueInput = $('<input type="text" class="param-value" placeholder="Value" style="width: 50%;">').val(value);
+          var removeButton = $('<button type="button" class="param-remove">Remove</button>');
+  
+          keyInput.on('input', saveNode);
+          valueInput.on('input', saveNode);
+  
+          removeButton.click(function() {
+            row.remove();
+            saveNode();
+          });
+  
+          row.append(keyInput).append(valueInput).append(removeButton);
+          $('#param-container').append(row);
+          saveNode(); // Обновление при добавлении нового поля
+        }
+  
+        function saveNode() {
+          var params = {};
+          $('#param-container .param-row').each(function() {
+            var key = $(this).find('.param-key').val().trim();
+            var value = $(this).find('.param-value').val().trim();
+            if (key) {
+              params[key] = value;
+            }
+          });
+          node.params = JSON.stringify(params);
+          $('#node-input-params').val(node.params);
+          node.dirty = true; // Установка флага dirty
+          RED.nodes.dirty(node); // Уведомление об изменении узла
+        }
+      },
+      oneditcancel: function() {
+        $('#node-input-name').val('');
+        $('#node-input-config').val('');
+        $('#node-input-method').val('');
+        $('#node-input-params').val('');
+        $('#param-container').empty();
+      },
+      oneditsave: function() {
+        this.name = $('#node-input-name').val().trim();
+        this.config = $('#node-input-config').val().trim();
+        this.method = $('#node-input-method').val().trim();
+  
+        var params = {};
+        $('#param-container .param-row').each(function() {
+          var key = $(this).find('.param-key').val().trim();
+          var value = $(this).find('.param-value').val().trim();
+          if (key) {
+            params[key] = value;
+          }
+        });
+        const jsonParams = JSON.stringify(params);
+        this.params = jsonParams != "{}" ? jsonParams : undefined;
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="method">
+    <div class="form-row">
+      <label for="node-input-name">
+        <i class="fa fa-tag"></i> Имя
+      </label>
+      <input type="text" id="node-input-name" placeholder="Имя">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-config">
+        <i class="fa fa-cog"></i> Конфигурация
+      </label>
+      <input id="node-input-config" required>
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-method">
+        <i class="fa fa-wrench"></i> Метод
+      </label>
+      <input type="text" id="node-input-method" placeholder="messages.send">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-input-params">
+        <i class="fa fa-cog"></i> Параметры
+      </label>
+      <input type="hidden" id="node-input-params">
+      <div id="param-container"></div>
+      <button type="button" id="add-param">Добавить параметр</button>
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="method">
+    <a href="https://dev.vk.com/method">https://dev.vk.com/method</a>
+  </script>
+  

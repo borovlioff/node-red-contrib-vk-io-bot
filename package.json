@@ -21,7 +21,8 @@
       "event":"sample/event.js",
       "keyboard":"sample/keyboard.js",
       "command":"sample/command.js",
-      "callback-event":"sample/callback-event.js"
+      "callback-event":"sample/callback-event.js",
+      "method":"sample/method.js"
     }
   },
   "dependencies": {
